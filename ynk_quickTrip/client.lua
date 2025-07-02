@@ -1,53 +1,45 @@
+ESX = exports['es_extended']:getSharedObject()
+
+function teleportToPlace(price, location)
+    local alert = lib.alertDialog({header = 'Hello there', content = 'Etes vous sur de vouloir vous teleporter ', centered = true, cancel = true})
+        if alert == 'confirm' then
+            TriggerServerEvent('moneyRemove', price)
+            lib.progressCircle({duration = Config.progressTime, position = 'bottom', useWhileDead = false, canCancel = false})
+            SetEntityCoords(PlayerPedId(), location)
+            lib.notify({title = 'Téléportation', description = 'Bien teleporte', type = 'success'})
+        end
+end
+
 lib.registerContext({
   id = 'tp_menu',
   title = 'Voyage rapide',
   options = {
     {
       title = 'Cayo Perico',
+      icon = 'fa-solid fa-umbrella-beach',
       onSelect = function()
-        local alert = lib.alertDialog({header = 'Hello there', content = 'Etes vous sur de vouloir vous teleporter au Cayo Perico pour 500 ', centered = true, cancel = true})
-        if alert == 'confirm' then
-          TriggerServerEvent('moneyRemove')
-          lib.progressCircle({duration = Config.progressTime, position = 'bottom', useWhileDead = false, canCancel = false})
-          SetEntityCoords(PlayerPedId(), Config.Locations.cayo_perico)
-          lib.notify({title = 'Téléportation', description = 'Téléporté à Cayo Perico', type = 'success'})
-        end
+        teleportToPlace(Config.InfosLocation[1].price, Config.InfosLocation[1].location)
       end
     },
     {
       title = 'Hopital',
+      icon = 'fa-solid fa-hospital',
       onSelect = function()
-        local alert = lib.alertDialog({header = 'Hello there', content = 'Etes vous sur de vouloir vous teleporter au Hopital pour 500', centered = true, cancel = true})
-        if alert == 'confirm' then
-          TriggerServerEvent('moneyRemove')
-          lib.progressCircle({duration = Config.progressTime, position = 'bottom', useWhileDead = false, canCancel = false})
-          SetEntityCoords(PlayerPedId(), Config.Locations.hopital)
-          lib.notify({title = 'Téléportation', description = 'Téléporté à l\'Hopital', type = 'success'})
-        end
+        teleportToPlace(Config.InfosLocation[2].price, Config.InfosLocation[2].location)
       end
     },
     {
       title = 'Police',
+      icon = 'fa-solid fa-shield-alt',
       onSelect = function()
-        local alert = lib.alertDialog({header = 'Hello there', content = 'Etes vous sur de vouloir vous teleporter à la Police pour 500', centered = true, cancel = true})
-        if alert == 'confirm' then
-          TriggerServerEvent('moneyRemove')
-          lib.progressCircle({duration = Config.progressTime, position = 'bottom', useWhileDead = false, canCancel = false})
-          SetEntityCoords(PlayerPedId(), Config.Locations.police)
-          lib.notify({title = 'Téléportation', description = 'Téléporté à la Police', type = 'success'})
-        end
+         teleportToPlace(Config.InfosLocation[3].price, Config.InfosLocation[3].location)
       end
     },
     {
       title = 'Parking Central',
+      icon = 'fa-solid fa-parking',
       onSelect = function()
-        local alert = lib.alertDialog({header = 'Hello there', content = 'Etes vous sur de vouloir vous teleporter au Parking Central pour 500', centered = true, cancel = true})
-        if alert == 'confirm' then
-          TriggerServerEvent('moneyRemove')
-          lib.progressCircle({duration = Config.progressTime, position = 'bottom', useWhileDead = false, canCancel = false})
-          SetEntityCoords(PlayerPedId(), Config.Locations.parking_central)
-          lib.notify({title = 'Téléportation', description = 'Téléporté au Parking Central', type = 'success'})
-        end
+         teleportToPlace(Config.InfosLocation[4].price, Config.InfosLocation[4].location)
       end
     }
   }
